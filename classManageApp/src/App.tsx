@@ -12,6 +12,7 @@ import { useEffect } from "react"
 import { useLoginStore } from "./store/useLoginStore"
 import { ThemeProvider } from "@mui/material"
 import { AddStudent } from "./components/students/AddStudent"
+import { AddClass } from "./components/classes/AddClass"
 
   //Validar con el servicio
   //Routes
@@ -38,6 +39,7 @@ function App() {
         <Route element={<ProtectedRouter/>}>
           <Route path="/students" element={<Students/>}/>
           <Route path="/addstudent" element={<AddStudent/>}/>
+          <Route path="/addclass" element={<AddClass/>}/>
           <Route path="/admin" element={<Admin/>}/>
           <Route path="/classes" element={<Classes/>}/>
           <Route path="/suscriptions" element={<Suscription/>}/>

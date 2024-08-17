@@ -1,20 +1,20 @@
 import { Button } from "@mui/material"
 
-interface AddStudentProps {
+interface AddClassProps {
     nombre: string
-    apellido: string
+    costo: string
     buttonText: string
     onSubmit: (e: any) => void
     onCancel: () => void
 }
 
-export const AddStudent = ({
+export const AddClass = ({
     nombre,
-    apellido,
+    costo,
     buttonText = "Guardar",
     onSubmit,
     onCancel,
-}: AddStudentProps) => {
+}: AddClassProps) => {
     return (
         <form onSubmit={onSubmit}>
             <input
@@ -25,9 +25,9 @@ export const AddStudent = ({
             />
             <input
                 type="text"
-                placeholder="Apellido"
-                name="apellido"
-                defaultValue={apellido}
+                placeholder="Costo"
+                name="costo"
+                defaultValue={costo}
             />
             <div>
                 <Button onClick={onCancel}>Cancelar</Button>

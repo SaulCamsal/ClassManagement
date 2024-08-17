@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { IStudent } from "../components/students/IStudent"
-import { getStudents } from "../services/student-service"
+import { deleteStudent, getStudents, postStudent, putStudent } from "../services/student-service"
 
 
 export function UseStudentData() {
@@ -25,22 +25,29 @@ export function UseStudentData() {
         setStudents(data)
     }
 
-    const applyStudentFilter = () => (
+    const applyStudentFilter = () => {
+        const searchLower = searchFilter.toLowerCase()
         setFilteredStudents(students.filter((student: IStudent) =>
-            student.nombre.toLowerCase().includes(searchFilter) ||
-            student.apellido.toLowerCase().includes(searchFilter)))
-    )
-
-    const putStudent = async (bodyData: any) => { 
-
+            student.nombre?.toLowerCase().includes(searchLower) ||
+            student.apellido?.toLowerCase().includes(searchLower)))
     }
 
-    const postStudent = async (bodyData: any) => { 
-        
-    }
-    const deleteStudent = async (id: string) => { 
-        
+    const putStudents = async (bodyData: any) => {
+        const data = await putStudent(bodyData)
+        setStudents(
+            students.map((student) =>
+                student.id === data.id ? { ...student, ...data } : student)
+        )
     }
 
-    return {students, filteredStudents, putStudent, postStudent, deleteStudent, setSearchFilter}
+    const postStudents = async (bodyData: any) => {
+        const data = await postStudent(bodyData)
+        setStudents([...students, data])
+    }
+    const deleteStudents = async (id: string) => {
+        const data = await deleteStudent(id)
+        setStudents(students.filter((student) => student.id !== id))
+    }
+
+    return { students, filteredStudents, putStudents, postStudents, deleteStudents, setSearchFilter }
 }

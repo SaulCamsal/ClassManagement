@@ -1,15 +1,16 @@
-import { IStudent } from "../components/students/IStudent"
+import { IPagos } from "../components/Payments/IPagos"
 
-export const url = "https://backend-subs-control.onrender.com/api/alumno"
 
-export async function getStudents() {
+export const url = 'https://backend-subs-control.onrender.com/api/pago'
+
+export async function getPayments() {
     const response = await fetch(url)
     const data = await response.json()
 
     return data
 }
 
-export async function postStudent(body: IStudent) {
+export async function postPayment(body: IPagos) {
     const response = await fetch(url, {
         method: 'POST',
         body: JSON.stringify(body),//payload
@@ -21,15 +22,15 @@ export async function postStudent(body: IStudent) {
     return data
 }
 
-export async function saveStudent(body: IStudent, isNew: boolean){
+export async function savePayment(body: IPagos, isNew: boolean){
     if(isNew){
-        return postStudent(body)
+        return postPayment(body)
     }else{
-        return putStudent(body)
+        return putPayment(body)
     }
 }
 
-export async function putStudent(body: IStudent){
+export async function putPayment(body: IPagos){
     console.log(JSON.stringify(body))
     const response = await fetch(`${url}/${body.id}`, {
         method:'PUT',
@@ -42,14 +43,10 @@ export async function putStudent(body: IStudent){
     return data
 }
 
-export async function deleteStudent(id: string){
+export async function deletePayment(id: string){
     const response = await fetch(`${url}/${id}`, {
         method: "DELETE",
     })
     const data = await response.json()
     return data
 }
-
-
-
-
